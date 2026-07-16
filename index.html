@@ -1,0 +1,2025 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- ============================================================
+     SEO & METADATA
+     ============================================================ -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suitwali | Handcrafted Indian Couture — Bridal, Festive &amp; Designer Wear</title>
+<meta name="description" content="Suitwali is a premium digital showroom for handcrafted Indian couture — designer suits, Anarkalis, lehengas, shararas, and bridal wear. Explore our collections and enquire directly on WhatsApp.">
+<link rel="canonical" href="https://suitwali.in/">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Suitwali | Handcrafted Indian Couture">
+<meta property="og:description" content="A premium digital showroom for handcrafted Indian couture. Explore our collections and enquire directly on WhatsApp.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://suitwali.in/">
+<meta property="og:image" content="https://suitwali.in/assets/icons/social-share.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+
+<!-- Organization structured data. Phone/email intentionally omitted —
+     both are unverified placeholders (see CONFIG in the JS block below)
+     and are excluded rather than published inaccurately. Add a
+     contactPoint once real details are supplied. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Suitwali",
+  "url": "https://suitwali.in/",
+  "description": "Premium digital showroom for handcrafted Indian couture — designer suits, Anarkalis, lehengas, shararas, and bridal wear.",
+  "areaServed": "IN"
+}
+</script>
+
+<style>
+/* ============================================================
+   SUITWALI — SINGLE-FILE STYLESHEET
+   Organised in the same order it's read: tokens first, then base
+   elements, then layout, then one block per component, in the order
+   those components appear on the page, then animations and
+   accessibility rules last. Every colour/spacing/type value used
+   anywhere below traces back to a custom property defined in
+   DESIGN TOKENS — never hard-code a new value inline.
+   ============================================================ */
+
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
+:root {
+  /* Colour — ratio guide: ~70% ivory/cream, ~20% charcoal text,
+     ~8% burgundy, ~2% gold. Gold is jewellery, not wallpaper. */
+  --color-ivory: #FAF6F0;
+  --color-cream: #F3EBDF;
+  --color-charcoal: #2B2622;
+  --color-burgundy: #6E2A32;
+  --color-burgundy-dark: #551F26;
+  --color-gold: #B08D4F;
+  --color-gold-soft: #CBB27E;
+  --color-warm-grey: #8C8377;
+  --color-border: rgba(43, 38, 34, 0.12);
+  --color-border-strong: rgba(43, 38, 34, 0.22);
+
+  --color-bg-primary: var(--color-ivory);
+  --color-bg-secondary: var(--color-cream);
+  --color-text-primary: var(--color-charcoal);
+  --color-text-secondary: var(--color-warm-grey);
+  --color-accent: var(--color-burgundy);
+  --color-accent-hover: var(--color-burgundy-dark);
+
+  /* Typography — display serif carries the brand voice, sans handles
+     body/UI. Using honest system-font fallbacks since no licensed font
+     files are bundled with this single-file build; see the Editing
+     Guide for how to add real @font-face files later if desired. */
+  --font-display: "Marcellus", "Canela", Georgia, "Times New Roman", serif;
+  --font-body: "General Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  --text-xs:   clamp(0.75rem, 0.72rem + 0.15vw, 0.8125rem);
+  --text-sm:   clamp(0.875rem, 0.85rem + 0.15vw, 0.9375rem);
+  --text-base: clamp(0.9375rem, 0.9rem + 0.2vw, 1rem);
+  --text-md:   clamp(1.0625rem, 1rem + 0.3vw, 1.1875rem);
+  --text-lg:   clamp(1.125rem, 1.05rem + 0.4vw, 1.25rem);
+  --text-xl:   clamp(1.5rem, 1.3rem + 1vw, 1.75rem);
+  --text-2xl:  clamp(2rem, 1.6rem + 2vw, 2.5rem);
+  --text-3xl:  clamp(2.5rem, 2rem + 2.5vw, 3.5rem);
+
+  --leading-tight: 1.15;
+  --leading-snug: 1.35;
+  --leading-body: 1.6;
+  --tracking-tight: -0.01em;
+  --tracking-wide: 0.03em;
+  --tracking-wider: 0.08em;
+  --weight-medium: 500;
+
+  /* Spacing — 8px base unit */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2rem;
+  --space-6: 3rem;
+  --space-7: 4rem;
+  --space-8: 6rem;
+  --space-9: 8rem;
+  --gutter-mobile: var(--space-3);
+  --gutter-tablet: var(--space-4);
+  --gutter-desktop: var(--space-7);
+  --gutter-desktop-lg: var(--space-8);
+  --section-gap-mobile: var(--space-6);
+  --section-gap-desktop: var(--space-8);
+
+  --container-max: 1600px;
+
+  /* Radius + shadow — one restrained tier of each */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 6px;
+  --radius-pill: 999px;
+  --shadow-soft: 0 4px 24px rgba(43, 38, 34, 0.06);
+
+  /* Motion — slow, eased-out, never bounce */
+  --ease-luxury: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 250ms;
+  --duration-base: 400ms;
+  --duration-slow: 600ms;
+  --duration-loader: 1000ms;
+
+  /* Z-index scale */
+  --z-sticky-header: 100;
+  --z-sticky-cta: 110;
+  --z-overlay: 200;
+  --z-enquiry-sheet: 210;
+  --z-nav-menu: 220;
+  --z-modal: 230;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms;
+    --duration-base: 0ms;
+    --duration-slow: 0ms;
+    --duration-loader: 0ms;
+  }
+}
+
+/* ============================================================
+   BASE STYLES
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; padding: 0; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: 72px; /* keeps anchor-scrolled sections clear of the sticky header */
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+body {
+  min-height: 100vh;
+  line-height: var(--leading-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-primary);
+  overflow-x: hidden;
+}
+
+img, picture, video, svg { display: block; max-width: 100%; height: auto; background-color: var(--color-cream); }
+button { background: none; border: none; cursor: pointer; text-align: inherit; font: inherit; color: inherit; }
+a { color: inherit; text-decoration: none; }
+ul, ol { list-style: none; }
+input, textarea { font: inherit; color: inherit; }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+}
+h1 { font-size: var(--text-2xl); }
+h2 { font-size: var(--text-xl); }
+h3 { font-size: var(--text-lg); line-height: var(--leading-snug); }
+h4 { font-size: var(--text-md); line-height: var(--leading-snug); }
+p { line-height: var(--leading-body); }
+p + p { margin-top: var(--space-3); }
+
+.text-lead { font-size: var(--text-md); }
+.text-meta { font-size: var(--text-xs); color: var(--color-text-secondary); letter-spacing: var(--tracking-wide); }
+.text-label { font-size: var(--text-xs); font-weight: var(--weight-medium); letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--color-text-secondary); }
+.text-accent { font-family: var(--font-display); font-style: italic; }
+.text-accent-gold { color: var(--color-gold-soft); }
+
+::selection { background-color: var(--color-gold-soft); color: var(--color-charcoal); }
+
+:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; border-radius: var(--radius-sm); }
+:focus:not(:focus-visible) { outline: none; }
+
+.skip-link {
+  position: absolute; top: -100%; left: var(--space-3); z-index: 300;
+  padding: var(--space-2) var(--space-3);
+  background-color: var(--color-charcoal); color: var(--color-ivory);
+  font-size: var(--text-sm); border-radius: var(--radius-md);
+  transition: top var(--duration-fast) var(--ease-luxury);
+}
+.skip-link:focus { top: var(--space-3); }
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+.no-scroll { overflow: hidden; height: 100vh; }
+
+.img-fade { opacity: 0; transform: scale(1.04); transition: opacity var(--duration-slow) var(--ease-luxury), transform var(--duration-slow) var(--ease-luxury); }
+.img-fade.is-loaded { opacity: 1; transform: scale(1); }
+
+.reveal { opacity: 0; transform: translateY(16px); transition: opacity var(--duration-slow) var(--ease-luxury), transform var(--duration-slow) var(--ease-luxury); }
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+.underline-draw { position: relative; }
+.underline-draw::after {
+  content: ""; position: absolute; left: 0; bottom: -2px; width: 100%; height: 1px;
+  background-color: var(--color-gold); transform: scaleX(0); transform-origin: left;
+  transition: transform var(--duration-fast) var(--ease-luxury);
+}
+.underline-draw:hover::after, .underline-draw:focus-visible::after { transform: scaleX(1); }
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+.container { width: 100%; max-width: var(--container-max); margin-inline: auto; padding-inline: var(--gutter-mobile); }
+@media (min-width: 768px)  { .container { padding-inline: var(--gutter-tablet); } }
+@media (min-width: 1024px) { .container { padding-inline: var(--gutter-desktop); } }
+@media (min-width: 1440px) { .container { padding-inline: var(--gutter-desktop-lg); } }
+
+.section { padding-block: var(--section-gap-mobile); }
+@media (min-width: 1024px) { .section { padding-block: var(--section-gap-desktop); } }
+.section--secondary-bg { background-color: var(--color-bg-secondary); }
+
+.aspect-portrait  { aspect-ratio: 4 / 5;  overflow: hidden; }
+.aspect-cinematic { aspect-ratio: 21 / 9; overflow: hidden; }
+.aspect-square    { aspect-ratio: 1 / 1;  overflow: hidden; }
+.aspect-portrait img, .aspect-cinematic img, .aspect-square img { width: 100%; height: 100%; object-fit: cover; }
+
+.section__heading-row { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--space-3); margin-bottom: var(--space-4); }
+.section__view-all { flex-shrink: 0; font-size: var(--text-xs); letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--color-accent); }
+
+@media (min-width: 1024px) {
+  .split-section { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); align-items: center; }
+  .split-section--reverse { direction: rtl; }
+  .split-section--reverse > * { direction: ltr; }
+}
+.split-section { display: grid; gap: var(--space-4); }
+.split-section__body { max-width: 48ch; }
+.split-section__eyebrow { margin-bottom: var(--space-2); }
+.split-section__title { margin-bottom: var(--space-3); }
+.split-section__text { color: var(--color-text-secondary); margin-bottom: var(--space-4); }
+
+/* ============================================================
+   COMPONENTS — Buttons
+   ============================================================ */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
+  min-height: 44px; padding: var(--space-2) var(--space-5); border-radius: var(--radius-md);
+  font-size: var(--text-sm); font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-wide); text-transform: uppercase; white-space: nowrap;
+  transition: background-color var(--duration-base) var(--ease-luxury), color var(--duration-base) var(--ease-luxury), border-color var(--duration-base) var(--ease-luxury);
+}
+.btn--primary { background-color: var(--color-accent); color: var(--color-ivory); border: 1px solid var(--color-accent); }
+.btn--primary:hover, .btn--primary:focus-visible { background-color: var(--color-accent-hover); border-color: var(--color-accent-hover); }
+.btn--secondary { background-color: transparent; color: var(--color-charcoal); border: 1px solid var(--color-border-strong); }
+.btn--secondary:hover, .btn--secondary:focus-visible { border-color: var(--color-charcoal); }
+.btn--on-image { background-color: transparent; color: var(--color-ivory); border: 1px solid rgba(250,246,240,0.6); }
+.btn--on-image:hover, .btn--on-image:focus-visible { background-color: rgba(250,246,240,0.12); border-color: var(--color-ivory); }
+.btn--whatsapp { background-color: var(--color-accent); color: var(--color-ivory); border: 1px solid var(--color-accent); width: 100%; }
+.btn--whatsapp:hover, .btn--whatsapp:focus-visible { background-color: var(--color-accent-hover); }
+.btn--block { width: 100%; }
+.btn:disabled { opacity: 0.5; cursor: default; }
+
+.icon-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px; border-radius: var(--radius-pill); flex-shrink: 0;
+  transition: background-color var(--duration-fast) var(--ease-luxury);
+}
+.icon-btn:hover, .icon-btn:focus-visible { background-color: rgba(43,38,34,0.06); }
+.icon-btn svg { width: 20px; height: 20px; stroke: currentColor; fill: none; }
+
+/* ============================================================
+   COMPONENTS — Announcement Bar
+   ============================================================ */
+.announcement-bar {
+  position: relative; display: flex; align-items: center; justify-content: center;
+  min-height: 40px; padding: var(--space-1) var(--space-6) var(--space-1) var(--space-3);
+  background-color: var(--color-charcoal); color: var(--color-ivory); text-align: center;
+}
+.announcement-bar__text { font-size: var(--text-xs); letter-spacing: var(--tracking-wide); }
+.announcement-bar__close { position: absolute; right: var(--space-2); top: 50%; transform: translateY(-50%); width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; color: var(--color-ivory); opacity: 0.7; }
+.announcement-bar__close:hover { opacity: 1; }
+.announcement-bar[hidden] { display: none; }
+
+/* ============================================================
+   COMPONENTS — Header (sticky, transparent-over-hero to solid)
+   ============================================================ */
+.site-header {
+  position: sticky; top: 0; z-index: var(--z-sticky-header); width: 100%;
+  background-color: transparent; color: var(--color-ivory);
+  transition: background-color var(--duration-base) var(--ease-luxury), color var(--duration-base) var(--ease-luxury), box-shadow var(--duration-base) var(--ease-luxury);
+}
+.site-header.is-solid { background-color: var(--color-ivory); color: var(--color-charcoal); box-shadow: var(--shadow-soft); }
+
+.site-header__inner { display: grid; grid-template-columns: 44px 1fr 44px 44px; align-items: center; gap: var(--space-2); padding-block: var(--space-2); }
+@media (min-width: 1024px) { .site-header__inner { grid-template-columns: auto 1fr auto; padding-block: var(--space-3); } }
+
+.site-header__toggle { grid-column: 1; color: currentColor; }
+@media (min-width: 1024px) { .site-header__toggle { display: none; } }
+
+.site-header__logo { grid-column: 2; justify-self: center; display: inline-flex; align-items: center; background-color: rgba(250, 246, 240, 0.92); padding: var(--space-1) var(--space-3); border-radius: var(--radius-pill); }
+.site-header__logo img { height: 20px; width: auto; }
+@media (min-width: 1024px) { .site-header__logo { grid-column: auto; justify-self: start; } .site-header__logo img { height: 24px; } }
+
+.site-header__nav { display: none; }
+@media (min-width: 1024px) {
+  .site-header__nav { display: flex; align-items: center; gap: var(--space-6); justify-self: center; }
+  .site-header__nav-link { font-size: var(--text-sm); letter-spacing: var(--tracking-wide); text-transform: uppercase; color: currentColor; }
+}
+
+.site-header__actions { grid-column: 3 / span 2; display: flex; align-items: center; justify-content: flex-end; gap: var(--space-1); color: currentColor; }
+@media (min-width: 1024px) { .site-header__actions { grid-column: auto; justify-self: end; } }
+
+/* ============================================================
+   COMPONENTS — Mobile Nav Menu (full-screen overlay)
+   ============================================================ */
+.nav-menu {
+  position: fixed; inset: 0; z-index: var(--z-nav-menu); display: flex; flex-direction: column;
+  background-color: var(--color-ivory); opacity: 0; visibility: hidden; transform: translateY(-8px);
+  transition: opacity var(--duration-base) var(--ease-luxury), transform var(--duration-base) var(--ease-luxury), visibility 0s linear var(--duration-base);
+}
+.nav-menu.is-open { opacity: 1; visibility: visible; transform: translateY(0); transition: opacity var(--duration-base) var(--ease-luxury), transform var(--duration-base) var(--ease-luxury), visibility 0s linear 0s; }
+@media (min-width: 1024px) { .nav-menu { display: none; } }
+.nav-menu__header { display: flex; align-items: center; justify-content: flex-end; padding: var(--space-2) var(--gutter-mobile); min-height: 60px; }
+.nav-menu__body { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: var(--space-5) var(--gutter-mobile); }
+.nav-menu__list { display: flex; flex-direction: column; gap: var(--space-4); }
+.nav-menu__link { font-family: var(--font-display); font-size: var(--text-2xl); color: var(--color-charcoal); }
+.nav-menu__footer { padding: var(--space-4) var(--gutter-mobile) var(--space-6); border-top: 1px solid var(--color-border); }
+.nav-menu__footer .btn { margin-bottom: var(--space-4); }
+.nav-menu__social { display: flex; gap: var(--space-4); color: var(--color-charcoal); }
+
+/* ============================================================
+   COMPONENTS — Search Overlay
+   ============================================================ */
+.search-overlay {
+  position: fixed; inset: 0; z-index: var(--z-overlay); display: flex; flex-direction: column;
+  background-color: var(--color-ivory); opacity: 0; visibility: hidden;
+  transition: opacity var(--duration-base) var(--ease-luxury), visibility 0s linear var(--duration-base);
+}
+.search-overlay.is-open { opacity: 1; visibility: visible; transition: opacity var(--duration-base) var(--ease-luxury), visibility 0s linear 0s; }
+.search-overlay__header { display: flex; align-items: center; justify-content: flex-end; padding: var(--space-2) var(--gutter-mobile); min-height: 60px; }
+.search-overlay__body { padding: 0 var(--gutter-mobile) var(--space-5); max-width: 720px; width: 100%; margin-inline: auto; flex: 1; overflow-y: auto; }
+.search-overlay__form { display: flex; align-items: flex-end; gap: var(--space-3); border-bottom: 1px solid var(--color-border-strong); padding-bottom: var(--space-2); }
+.search-overlay__input { border: none; background: transparent; font-family: var(--font-display); font-size: var(--text-xl); padding: var(--space-2) 0; width: 100%; }
+.search-overlay__input:focus { outline: none; }
+.search-overlay__hint { margin-top: var(--space-4); }
+.search-overlay__chips { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-3); }
+.search-overlay__chip { padding: var(--space-1) var(--space-3); border: 1px solid var(--color-border-strong); border-radius: var(--radius-pill); font-size: var(--text-xs); letter-spacing: var(--tracking-wide); color: var(--color-text-secondary); }
+.search-overlay__results { margin-top: var(--space-5); display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-3); }
+@media (min-width: 768px) { .search-overlay__results { grid-template-columns: repeat(3, 1fr); } }
+.search-overlay__empty { color: var(--color-text-secondary); margin-top: var(--space-5); }
+
+/* ============================================================
+   COMPONENTS — Hero
+   ============================================================ */
+.hero { position: relative; min-height: 78vh; min-height: 78svh; display: flex; align-items: flex-end; overflow: hidden; background-color: var(--color-charcoal); }
+@media (min-width: 1024px) { .hero { min-height: 88vh; min-height: 88svh; } }
+.hero__media { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.hero__scrim { position: absolute; inset: 0; background: linear-gradient(to top, rgba(43,38,34,0.65) 0%, rgba(43,38,34,0.25) 45%, rgba(43,38,34,0.05) 70%); }
+.hero__content { position: relative; z-index: 1; width: 100%; padding: var(--space-6) var(--gutter-mobile) var(--space-7); color: var(--color-ivory); }
+@media (min-width: 1024px) { .hero__content { padding: var(--space-8) var(--gutter-desktop) var(--space-9); max-width: 760px; } }
+.hero__eyebrow { color: var(--color-gold-soft); margin-bottom: var(--space-3); }
+.hero__title { color: var(--color-ivory); font-size: var(--text-2xl); margin-bottom: var(--space-4); }
+@media (min-width: 1024px) { .hero__title { font-size: var(--text-3xl); } }
+.hero__subtitle { color: var(--color-ivory); opacity: 0.9; max-width: 42ch; margin-bottom: var(--space-5); }
+
+/* ============================================================
+   COMPONENTS — Cards (Collection + Product)
+   ============================================================ */
+.collection-card, .product-card { display: block; color: var(--color-charcoal); width: 100%; }
+.collection-card__media, .product-card__media { position: relative; border-radius: var(--radius-md); margin-bottom: var(--space-3); }
+.collection-card__body, .product-card__body { padding-inline: var(--space-1); }
+.collection-card__name { margin-bottom: var(--space-1); }
+.collection-card__mood { display: flex; flex-wrap: wrap; gap: var(--space-1); margin-bottom: var(--space-2); }
+.collection-card__mood-tag { font-size: var(--text-xs); color: var(--color-text-secondary); }
+.collection-card__mood-tag:not(:last-child)::after { content: "·"; margin-left: var(--space-1); color: var(--color-gold); }
+.collection-card__philosophy { font-size: var(--text-sm); color: var(--color-text-secondary); }
+
+.product-card__collection { font-size: var(--text-xs); color: var(--color-text-secondary); letter-spacing: var(--tracking-wide); text-transform: uppercase; margin-bottom: var(--space-1); }
+.product-card__name { font-size: var(--text-md); font-family: var(--font-display); margin-bottom: var(--space-1); }
+.product-card__meta { font-size: var(--text-xs); color: var(--color-text-secondary); }
+.product-card__unavailable { display: inline-block; margin-top: var(--space-1); font-size: var(--text-xs); letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--color-accent); }
+
+@media (min-width: 1024px) {
+  .zoom-on-hover { overflow: hidden; }
+  .zoom-on-hover img { transition: transform var(--duration-slow) var(--ease-luxury); }
+  .zoom-on-hover:hover img { transform: scale(1.03); }
+}
+
+/* ============================================================
+   COMPONENTS — Carousel (native scroll-snap, JS only adds desktop arrows)
+   ============================================================ */
+.carousel { position: relative; }
+.carousel__track {
+  display: flex; gap: var(--space-3); overflow-x: auto; scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--gutter-mobile); padding-inline: var(--gutter-mobile); padding-bottom: var(--space-2);
+  -webkit-overflow-scrolling: touch; scrollbar-width: none;
+}
+.carousel__track::-webkit-scrollbar { display: none; }
+@media (min-width: 1024px) { .carousel__track { gap: var(--space-4); padding-inline: var(--gutter-desktop); scroll-padding-inline: var(--gutter-desktop); } }
+.carousel__item { flex: 0 0 78%; scroll-snap-align: start; }
+@media (min-width: 600px)  { .carousel__item { flex-basis: 46%; } }
+@media (min-width: 1024px) { .carousel__item { flex-basis: 30%; } }
+@media (min-width: 1440px) { .carousel__item { flex-basis: 23%; } }
+.carousel__controls { display: none; }
+@media (min-width: 1024px) {
+  .carousel__controls { display: flex; justify-content: flex-end; gap: var(--space-2); padding-inline: var(--gutter-desktop); margin-bottom: var(--space-3); }
+  .carousel__control { color: var(--color-charcoal); border: 1px solid var(--color-border-strong); border-radius: var(--radius-pill); }
+  .carousel__control:hover, .carousel__control:focus-visible { border-color: var(--color-charcoal); }
+  .carousel__control:disabled { opacity: 0.35; cursor: default; }
+}
+
+/* ============================================================
+   COMPONENTS — Product Catalogue: Filters + Grid
+   ============================================================ */
+.filter-bar {
+  display: flex; flex-direction: column; gap: var(--space-3);
+  padding-inline: var(--gutter-mobile); margin-bottom: var(--space-5);
+}
+@media (min-width: 1024px) { .filter-bar { padding-inline: var(--gutter-desktop); flex-direction: row; align-items: center; justify-content: space-between; } }
+
+.filter-bar__search { position: relative; flex: 1; max-width: 420px; }
+.filter-bar__search input {
+  width: 100%; min-height: 44px; padding: var(--space-2) var(--space-2) var(--space-2) var(--space-5);
+  background: transparent; border: none; border-bottom: 1px solid var(--color-border-strong);
+  font-size: var(--text-base);
+}
+.filter-bar__search input:focus { outline: none; border-bottom-color: var(--color-accent); }
+.filter-bar__search svg { position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 18px; height: 18px; stroke: var(--color-text-secondary); fill: none; }
+
+.filter-bar__chips { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.filter-chip {
+  min-height: 36px; padding: var(--space-1) var(--space-3); border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-pill); font-size: var(--text-xs); letter-spacing: var(--tracking-wide);
+  text-transform: uppercase; color: var(--color-text-secondary);
+  transition: background-color var(--duration-fast) var(--ease-luxury), color var(--duration-fast) var(--ease-luxury), border-color var(--duration-fast) var(--ease-luxury);
+}
+.filter-chip:hover { border-color: var(--color-charcoal); }
+.filter-chip.is-active { background-color: var(--color-charcoal); border-color: var(--color-charcoal); color: var(--color-ivory); }
+
+.product-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-3) var(--space-2);
+  padding-inline: var(--gutter-mobile);
+}
+@media (min-width: 768px)  { .product-grid { grid-template-columns: repeat(3, 1fr); gap: var(--space-4); padding-inline: var(--gutter-tablet); } }
+@media (min-width: 1024px) { .product-grid { grid-template-columns: repeat(4, 1fr); padding-inline: var(--gutter-desktop); } }
+
+.product-grid__card { text-align: left; }
+.product-grid__empty { grid-column: 1 / -1; text-align: center; color: var(--color-text-secondary); padding-block: var(--space-6); }
+
+/* ============================================================
+   COMPONENTS — Product Modal (full-screen detail overlay)
+   Replaces a separate Product Detail page per the single-page
+   architecture — everything a Product page would contain lives here.
+   ============================================================ */
+.product-modal {
+  position: fixed; inset: 0; z-index: var(--z-modal);
+  background-color: var(--color-ivory); overflow-y: auto;
+  opacity: 0; visibility: hidden; transform: translateY(12px);
+  transition: opacity var(--duration-base) var(--ease-luxury), transform var(--duration-base) var(--ease-luxury), visibility 0s linear var(--duration-base);
+}
+.product-modal.is-open { opacity: 1; visibility: visible; transform: translateY(0); transition: opacity var(--duration-base) var(--ease-luxury), transform var(--duration-base) var(--ease-luxury), visibility 0s linear 0s; }
+
+.product-modal__header {
+  position: sticky; top: 0; z-index: 2; display: flex; align-items: center; justify-content: space-between;
+  padding: var(--space-2) var(--gutter-mobile); background-color: var(--color-ivory); border-bottom: 1px solid var(--color-border);
+}
+.product-modal__code { font-size: var(--text-xs); letter-spacing: var(--tracking-wide); color: var(--color-text-secondary); }
+
+.product-modal__body { padding-bottom: 100px; } /* clears the sticky mobile CTA bar */
+@media (min-width: 1024px) { .product-modal__body { padding-bottom: var(--space-7); } }
+
+/* Gallery — swipeable on mobile via scroll-snap, identical mechanism to
+   the homepage carousels, no separate JS needed. */
+.product-modal__gallery { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.product-modal__gallery::-webkit-scrollbar { display: none; }
+.product-modal__gallery img { flex: 0 0 100%; scroll-snap-align: start; aspect-ratio: 4 / 5; object-fit: cover; }
+@media (min-width: 1024px) {
+  .product-modal__gallery { max-width: 640px; margin-inline: auto; border-radius: var(--radius-md); overflow: hidden; }
+}
+
+.product-modal__content { padding: var(--space-5) var(--gutter-mobile) 0; }
+@media (min-width: 1024px) {
+  .product-modal__content { max-width: 720px; margin-inline: auto; padding: var(--space-6) var(--gutter-desktop) 0; }
+}
+
+.product-modal__collection { font-size: var(--text-xs); letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--color-accent); margin-bottom: var(--space-1); }
+.product-modal__name { margin-bottom: var(--space-3); }
+
+.craft-detail-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-3); margin-block: var(--space-4); }
+.craft-detail-grid dt { font-size: var(--text-xs); letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--color-text-secondary); margin-bottom: 2px; }
+.craft-detail-grid dd { font-size: var(--text-sm); }
+
+/* Accordion — Fabric Story / Craft Story / Customisation / Care /
+   Delivery, using native <details> as the accessible baseline so it
+   works even if JS fails, per the accessibility requirement. */
+.product-accordion { border-top: 1px solid var(--color-border); }
+.product-accordion__item { border-bottom: 1px solid var(--color-border); }
+.product-accordion__item summary {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--space-3);
+  padding-block: var(--space-3); cursor: pointer; list-style: none; font-family: var(--font-display); font-size: var(--text-md);
+}
+.product-accordion__item summary::-webkit-details-marker { display: none; }
+.product-accordion__item summary::after {
+  content: "+"; font-family: var(--font-body); font-size: var(--text-lg); color: var(--color-gold); flex-shrink: 0;
+  transition: transform var(--duration-fast) var(--ease-luxury);
+}
+.product-accordion__item[open] summary::after { transform: rotate(45deg); }
+.product-accordion__item p { color: var(--color-text-secondary); padding-bottom: var(--space-3); }
+
+.product-modal__related { margin-top: var(--space-7); padding-top: var(--space-5); border-top: 1px solid var(--color-border); }
+.product-modal__related-heading { padding-inline: var(--gutter-mobile); margin-bottom: var(--space-3); }
+@media (min-width: 1024px) { .product-modal__related-heading { padding-inline: 0; } }
+
+/* Sticky bottom WhatsApp CTA — mobile only, appears once the gallery is
+   scrolled past (JS-controlled), matching the "desire before ask"
+   emotional sequencing from the approved blueprint. */
+.product-modal__sticky-cta {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: var(--z-sticky-cta);
+  padding: var(--space-3) var(--gutter-mobile); background-color: var(--color-ivory);
+  border-top: 1px solid var(--color-border); box-shadow: 0 -4px 24px rgba(43,38,34,0.06);
+  transform: translateY(100%); transition: transform var(--duration-base) var(--ease-luxury);
+}
+.product-modal__sticky-cta.is-visible { transform: translateY(0); }
+@media (min-width: 1024px) { .product-modal__sticky-cta { display: none; } }
+
+.cta-glow { animation: cta-glow 2600ms ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .cta-glow { animation: none; } }
+
+/* ============================================================
+   COMPONENTS — WhatsApp Enquiry Sheet (slide-up)
+   ============================================================ */
+.enquiry-backdrop {
+  position: fixed; inset: 0; z-index: var(--z-enquiry-sheet); background-color: rgba(43,38,34,0.45);
+  opacity: 0; visibility: hidden; transition: opacity var(--duration-base) var(--ease-luxury), visibility 0s linear var(--duration-base);
+}
+.enquiry-backdrop.is-open { opacity: 1; visibility: visible; transition: opacity var(--duration-base) var(--ease-luxury), visibility 0s linear 0s; }
+
+.enquiry-sheet {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: calc(var(--z-enquiry-sheet) + 1);
+  max-height: 88vh; overflow-y: auto; background-color: var(--color-ivory);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0; padding: var(--space-4) var(--gutter-mobile) var(--space-6);
+  transform: translateY(100%); transition: transform var(--duration-base) var(--ease-luxury);
+}
+.enquiry-sheet.is-open { transform: translateY(0); }
+@media (min-width: 768px) {
+  .enquiry-sheet { left: 50%; right: auto; bottom: var(--space-5); width: 100%; max-width: 480px; margin-left: -240px; border-radius: var(--radius-lg); }
+}
+
+.enquiry-sheet__handle { width: 40px; height: 4px; border-radius: var(--radius-pill); background-color: var(--color-border-strong); margin: 0 auto var(--space-3); }
+.enquiry-sheet__header { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-4); }
+.enquiry-sheet__product { font-size: var(--text-xs); color: var(--color-text-secondary); margin-bottom: var(--space-4); }
+
+.enquiry-field { margin-bottom: var(--space-3); }
+.enquiry-field label { display: block; margin-bottom: var(--space-1); font-size: var(--text-xs); letter-spacing: var(--tracking-wide); color: var(--color-text-secondary); }
+.enquiry-field input, .enquiry-field select, .enquiry-field textarea {
+  width: 100%; min-height: 44px; padding: var(--space-2) 0; background: transparent; border: none;
+  border-bottom: 1px solid var(--color-border-strong); font-size: var(--text-base);
+}
+.enquiry-field input:focus, .enquiry-field select:focus, .enquiry-field textarea:focus { outline: none; border-bottom-color: var(--color-accent); }
+.enquiry-field textarea { min-height: 72px; resize: vertical; }
+
+.enquiry-sheet__size-toggle { display: flex; gap: var(--space-2); margin-bottom: var(--space-3); }
+.enquiry-sheet__size-toggle button {
+  flex: 1; min-height: 40px; border: 1px solid var(--color-border-strong); border-radius: var(--radius-md);
+  font-size: var(--text-xs); letter-spacing: var(--tracking-wide); text-transform: uppercase;
+}
+.enquiry-sheet__size-toggle button.is-active { background-color: var(--color-charcoal); border-color: var(--color-charcoal); color: var(--color-ivory); }
+
+.enquiry-sheet__actions { display: flex; flex-direction: column; gap: var(--space-2); margin-top: var(--space-4); }
+.enquiry-sheet__skip { text-align: center; font-size: var(--text-xs); letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--color-text-secondary); min-height: 44px; }
+
+/* ============================================================
+   COMPONENTS — Testimonial Strip
+   ============================================================ */
+.testimonial-strip { display: flex; flex-direction: column; gap: var(--space-6); }
+@media (min-width: 1024px) { .testimonial-strip { flex-direction: row; gap: var(--space-5); } }
+.testimonial { flex: 1; text-align: center; }
+.testimonial__quote { font-size: var(--text-lg); line-height: var(--leading-snug); margin-bottom: var(--space-3); }
+
+/* ============================================================
+   COMPONENTS — Lifestyle Grid
+   ============================================================ */
+.lifestyle-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-1); }
+@media (min-width: 768px)  { .lifestyle-grid { grid-template-columns: repeat(4, 1fr); gap: var(--space-2); } }
+@media (min-width: 1024px) { .lifestyle-grid { grid-template-columns: repeat(6, 1fr); } }
+.lifestyle-grid__item { position: relative; display: block; }
+.lifestyle-grid__image { transition: opacity var(--duration-base) var(--ease-luxury); }
+.lifestyle-grid__item:hover .lifestyle-grid__image { opacity: 0.85; }
+
+/* ============================================================
+   COMPONENTS — Craftsmanship Journey (scroll-story)
+   ============================================================ */
+.journey { display: flex; flex-direction: column; gap: var(--space-6); }
+@media (min-width: 768px) { .journey { gap: var(--space-7); } }
+.journey__stage { display: grid; gap: var(--space-3); align-items: center; }
+@media (min-width: 768px) {
+  .journey__stage { grid-template-columns: 1fr 1.2fr; gap: var(--space-5); }
+  .journey__stage:nth-child(even) { direction: rtl; }
+  .journey__stage:nth-child(even) > * { direction: ltr; }
+}
+.journey__number { color: var(--color-gold); margin-bottom: var(--space-1); }
+
+/* ============================================================
+   COMPONENTS — Footer
+   ============================================================ */
+.site-footer { background-color: var(--color-cream); padding-block: var(--space-7); }
+.site-footer__top { display: grid; gap: var(--space-6); margin-bottom: var(--space-6); }
+@media (min-width: 768px) { .site-footer__top { grid-template-columns: 1.2fr 1fr 1fr; gap: var(--space-5); } }
+.site-footer__brand-name { display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-2); }
+.site-footer__brand-name img { height: 22px; width: auto; }
+.site-footer__tagline { color: var(--color-text-secondary); max-width: 32ch; }
+.site-footer__heading { margin-bottom: var(--space-3); }
+.site-footer__list { display: flex; flex-direction: column; gap: var(--space-2); }
+.site-footer__social { display: flex; gap: var(--space-3); margin-top: var(--space-4); }
+.site-footer__bottom { display: flex; flex-direction: column; gap: var(--space-3); padding-top: var(--space-4); border-top: 1px solid var(--color-border); }
+@media (min-width: 768px) { .site-footer__bottom { flex-direction: row; align-items: center; justify-content: space-between; } }
+.site-footer__legal { display: flex; gap: var(--space-4); }
+.site-footer__legal button { font-size: var(--text-xs); color: var(--color-text-secondary); }
+.site-footer__copyright { color: var(--color-text-secondary); font-size: var(--text-xs); }
+
+/* ============================================================
+   COMPONENTS — Legal Overlay (Privacy / Terms)
+   In-page accessible overlays rather than separate pages, per the
+   single-file architecture requirement.
+   ============================================================ */
+.legal-overlay {
+  position: fixed; inset: 0; z-index: var(--z-modal); background-color: var(--color-ivory); overflow-y: auto;
+  opacity: 0; visibility: hidden; transition: opacity var(--duration-base) var(--ease-luxury), visibility 0s linear var(--duration-base);
+}
+.legal-overlay.is-open { opacity: 1; visibility: visible; transition: opacity var(--duration-base) var(--ease-luxury), visibility 0s linear 0s; }
+.legal-overlay__header { position: sticky; top: 0; display: flex; align-items: center; justify-content: space-between; padding: var(--space-2) var(--gutter-mobile); background-color: var(--color-ivory); border-bottom: 1px solid var(--color-border); }
+.legal-overlay__body { max-width: 720px; margin-inline: auto; padding: var(--space-5) var(--gutter-mobile) var(--space-8); }
+.legal-overlay__body h3 { margin-top: var(--space-5); margin-bottom: var(--space-2); }
+.legal-overlay__body p { color: var(--color-text-secondary); margin-bottom: var(--space-3); }
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+@keyframes page-fade-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+@keyframes cta-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(176,141,79,0); }
+  50%      { box-shadow: 0 0 0 6px rgba(176,141,79,0.12); }
+}
+
+/* Fabric-inspired horizontal "unveil" wipe — reserved for one key
+   emotional beat (used once, on the Craftsmanship section heading). */
+.reveal-unveil { position: relative; overflow: hidden; }
+.reveal-unveil::after {
+  content: ""; position: absolute; inset: 0; background-color: var(--color-ivory);
+  transform: scaleX(1); transform-origin: right; transition: transform var(--duration-slow) var(--ease-luxury);
+}
+.reveal-unveil.is-visible::after { transform: scaleX(0); }
+
+/* ============================================================
+   ACCESSIBILITY
+   (focus states and skip-link are defined in Base Styles above;
+   this block covers the remaining global accessibility rules)
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal, .img-fade, .reveal-unveil::after { opacity: 1 !important; transform: none !important; }
+}
+</style>
+</head>
+<body data-page="home">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <!-- ============================================================
+       ANNOUNCEMENT BAR
+       ============================================================ -->
+  <div class="announcement-bar" data-announcement>
+    <p class="announcement-bar__text">
+      <span class="text-accent-gold">Now taking bridal appointments</span> for 2026 weddings — enquire on WhatsApp
+    </p>
+    <button class="announcement-bar__close icon-btn" type="button" data-announcement-close aria-label="Dismiss announcement">
+      <svg viewBox="0 0 24 24" stroke-width="1.5" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+
+  <!-- ============================================================
+       HEADER
+       ============================================================ -->
+  <header class="site-header" data-header>
+    <div class="container">
+      <div class="site-header__inner">
+        <button class="site-header__toggle icon-btn" type="button" data-nav-toggle aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu">
+          <svg viewBox="0 0 24 24" stroke-width="1.5" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        </button>
+
+        <a class="site-header__logo" href="#home" data-scroll-link>
+          <img src="assets/logo/suitwali-logo.svg" alt="Suitwali">
+        </a>
+
+        <nav class="site-header__nav" aria-label="Primary">
+          <a class="site-header__nav-link underline-draw" href="#home" data-scroll-link>Home</a>
+          <a class="site-header__nav-link underline-draw" href="#collections" data-scroll-link>Collections</a>
+          <a class="site-header__nav-link underline-draw" href="#products" data-scroll-link>Shop</a>
+          <a class="site-header__nav-link underline-draw" href="#craftsmanship" data-scroll-link>Craftsmanship</a>
+          <a class="site-header__nav-link underline-draw" href="#about" data-scroll-link>About</a>
+          <a class="site-header__nav-link underline-draw" href="#contact" data-scroll-link>Contact</a>
+        </nav>
+
+        <div class="site-header__actions">
+          <button class="site-header__icon-btn icon-btn" type="button" data-search-toggle aria-expanded="false" aria-controls="search-overlay" aria-label="Open search">
+            <svg viewBox="0 0 24 24" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          </button>
+          <button class="site-header__icon-btn icon-btn" type="button" data-whatsapp-open="general" aria-label="Chat with us on WhatsApp">
+            <svg viewBox="0 0 24 24" stroke-width="1.5" aria-hidden="true"><path d="M3 21l1.6-4.8A9 9 0 1 1 8.8 19.4L3 21z"/><path d="M8.5 9.5c0 3.5 2.5 6 6 6l1.2-2 2.3.9c-.2 1.7-1.7 2.6-3.3 2.6C10.5 17 6 12.5 6 8.3 6 6.7 6.9 5.2 8.6 5l.9 2.3-2 1.2z"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       MOBILE NAV MENU
+       ============================================================ -->
+  <nav class="nav-menu" id="nav-menu" data-nav-menu aria-label="Mobile">
+    <div class="nav-menu__header">
+      <button class="nav-menu__close icon-btn" type="button" data-nav-close aria-label="Close menu">
+        <svg viewBox="0 0 24 24" stroke-width="1.5" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="nav-menu__body">
+      <ul class="nav-menu__list">
+        <li><a class="nav-menu__link" href="#home" data-scroll-link>Home</a></li>
+        <li><a class="nav-menu__link" href="#collections" data-scroll-link>Collections</a></li>
+        <li><a class="nav-menu__link" href="#products" data-scroll-link>Shop</a></li>
+        <li><a class="nav-menu__link" href="#craftsmanship" data-scroll-link>Craftsmanship</a></li>
+        <li><a class="nav-menu__link" href="#about" data-scroll-link>About</a></li>
+        <li><a class="nav-menu__link" href="#contact" data-scroll-link>Contact</a></li>
+      </ul>
+    </div>
+    <div class="nav-menu__footer">
+      <button class="btn btn--whatsapp" type="button" data-whatsapp-open="general">Enquire on WhatsApp</button>
+      <div class="nav-menu__social">
+        <!-- PLACEHOLDER social links — replace with real profile URLs -->
+        <a href="#" aria-label="Suitwali on Instagram">Instagram</a>
+        <a href="#" aria-label="Suitwali on Pinterest">Pinterest</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       SEARCH OVERLAY — genuinely functional: searches the in-page
+       PRODUCTS array live, since all product data already lives in
+       this file (no fetch required).
+       ============================================================ -->
+  <div class="search-overlay" id="search-overlay" data-search-overlay role="dialog" aria-modal="true" aria-label="Search">
+    <div class="search-overlay__header">
+      <button class="icon-btn" type="button" data-search-close aria-label="Close search">
+        <svg viewBox="0 0 24 24" stroke-width="1.5" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="search-overlay__body">
+      <form class="search-overlay__form" role="search" onsubmit="return false;">
+        <label class="visually-hidden" for="search-input">Search collections and products</label>
+        <input class="search-overlay__input" id="search-input" type="search" placeholder="Search Anarkalis, lehengas, Banarasi silk…" autocomplete="off" data-search-input>
+      </form>
+      <div data-search-hint>
+        <p class="text-label" style="margin-top: 1.5rem;">Popular searches</p>
+        <div class="search-overlay__chips">
+          <button class="search-overlay__chip" type="button" data-search-chip="Bridal">Bridal</button>
+          <button class="search-overlay__chip" type="button" data-search-chip="Festive">Festive</button>
+          <button class="search-overlay__chip" type="button" data-search-chip="Zardozi">Zardozi</button>
+          <button class="search-overlay__chip" type="button" data-search-chip="Silk">Silk</button>
+        </div>
+      </div>
+      <div class="search-overlay__results" data-search-results></div>
+      <p class="search-overlay__empty" data-search-empty hidden>No pieces matched your search — try a collection name, fabric, or colour.</p>
+    </div>
+  </div>
+
+  <main id="main-content">
+
+    <!-- ============================================================
+         HERO
+         ============================================================ -->
+    <section class="hero" id="home">
+      <img class="hero__media" src="assets/hero/homepage-hero.webp"
+           alt="Placeholder — replace with cinematic editorial photography or a fabric-motion still"
+           width="1920" height="823">
+      <div class="hero__scrim" aria-hidden="true"></div>
+      <div class="hero__content">
+        <p class="hero__eyebrow text-label">Premium Indian Couture</p>
+        <h1 class="hero__title">Handcrafted for the moments you'll tell your daughters about.</h1>
+        <p class="hero__subtitle">Designer suits, Anarkalis, lehengas, and bridal wear — each piece made by hand, for the milestones that deserve it.</p>
+        <a class="btn btn--on-image" href="#products" data-scroll-link>Shop the Edit</a>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         BRAND INTRODUCTION STRIP
+         ============================================================ -->
+    <section class="section">
+      <div class="container" style="max-width:640px; text-align:center;">
+        <div class="reveal">
+          <p class="text-label">The House of Suitwali</p>
+          <p class="text-lead" style="margin-top:1rem;">
+            Every piece begins as a conversation with a karigar, not a factory order. We work in small batches, favouring hand embroidery, hand-loomed fabric, and construction that is meant to be worn again — by you, and one day, by your daughter.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         FEATURED COLLECTIONS — rendered from COLLECTIONS array
+         ============================================================ -->
+    <section class="section section--secondary-bg" id="collections" aria-labelledby="collections-heading">
+      <div class="section__heading-row container">
+        <div>
+          <p class="text-label">Curated Worlds</p>
+          <h2 id="collections-heading">Featured Collections</h2>
+        </div>
+        <a class="section__view-all underline-draw" href="#products" data-scroll-link>Shop All</a>
+      </div>
+
+      <div class="carousel">
+        <div class="carousel__controls">
+          <button class="carousel__control icon-btn" type="button" data-carousel-prev="collections-track" aria-label="Previous collection">
+            <svg viewBox="0 0 24 24" stroke-width="1.5" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
+          </button>
+          <button class="carousel__control icon-btn" type="button" data-carousel-next="collections-track" aria-label="Next collection">
+            <svg viewBox="0 0 24 24" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+        <div class="carousel__track" id="collections-track" data-collections-track></div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         PRODUCT CATALOGUE — search, filters, and grid, all rendered
+         from the PRODUCTS array. Tapping a card opens the Product Modal.
+         ============================================================ -->
+    <section class="section" id="products" aria-labelledby="products-heading">
+      <div class="section__heading-row container">
+        <div>
+          <p class="text-label">The Full Edit</p>
+          <h2 id="products-heading">Shop the Collection</h2>
+        </div>
+      </div>
+
+      <div class="filter-bar">
+        <div class="filter-bar__search">
+          <svg viewBox="0 0 24 24" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          <label class="visually-hidden" for="catalogue-search">Search products</label>
+          <input id="catalogue-search" type="search" placeholder="Search by name, fabric, or colour…" data-catalogue-search autocomplete="off">
+        </div>
+        <div class="filter-bar__chips" data-filter-chips role="group" aria-label="Filter by collection">
+          <!-- Populated by JS from COLLECTIONS + a fixed "All" chip -->
+        </div>
+      </div>
+
+      <div class="product-grid" data-product-grid aria-live="polite">
+        <p class="product-grid__empty">Loading pieces…</p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CRAFTSMANSHIP TEASER (split section, links down to full journey)
+         ============================================================ -->
+    <section class="section section--secondary-bg">
+      <div class="container">
+        <div class="split-section">
+          <div class="split-section__media aspect-portrait reveal-image">
+            <img class="img-fade" src="assets/craftsmanship/craftsmanship-teaser.webp"
+                 alt="Placeholder — replace with a photograph of an artisan at work"
+                 loading="lazy" width="1400" height="1750">
+          </div>
+          <div class="split-section__body reveal">
+            <p class="split-section__eyebrow text-label">Our Craft</p>
+            <h2 class="split-section__title">Design. Fabric. Hand embroidery. Stitching. Inspection. You.</h2>
+            <p class="split-section__text">Every Suitwali piece follows the same journey before it reaches you — from the first sketch to the final hand inspection. It's a slower way of making clothes, and it's the only way we know.</p>
+            <a class="btn btn--secondary" href="#craftsmanship" data-scroll-link>Discover Our Craft</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         TESTIMONIALS + BRAND DETAIL IMAGE
+         ============================================================ -->
+    <section class="section">
+      <div class="container">
+        <div class="split-section split-section--reverse">
+          <div class="split-section__media aspect-square reveal-image">
+            <img class="img-fade" src="assets/craftsmanship/brand-intro.webp"
+                 alt="Placeholder — replace with a close-up embroidery or handwork detail shot"
+                 loading="lazy" width="1200" height="1200">
+          </div>
+          <div class="split-section__body reveal">
+            <p class="split-section__eyebrow text-label">In Her Words</p>
+            <div class="testimonial-strip">
+              <blockquote class="testimonial">
+                <p class="testimonial__quote text-accent">"It felt like she already knew what I wanted before I said it."</p>
+                <cite class="text-meta">— Placeholder testimonial, Mehndi bride, 2025</cite>
+              </blockquote>
+              <blockquote class="testimonial">
+                <p class="testimonial__quote text-accent">"The embroidery photos on the site matched the piece exactly when it arrived."</p>
+                <cite class="text-meta">— Placeholder testimonial, Reception guest, 2025</cite>
+              </blockquote>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         LIFESTYLE STRIP — reuses collection/product photography
+         (populated by JS) rather than requiring a separate image set.
+         ============================================================ -->
+    <section class="section" aria-labelledby="lifestyle-heading">
+      <div class="section__heading-row container">
+        <div>
+          <p class="text-label">@suitwali</p>
+          <h2 id="lifestyle-heading">Styled, Worn, Loved</h2>
+        </div>
+        <a class="section__view-all underline-draw" href="#" target="_blank" rel="noopener">Follow Along</a>
+      </div>
+      <div class="lifestyle-grid container" data-lifestyle-grid></div>
+    </section>
+
+    <!-- ============================================================
+         CRAFTSMANSHIP — full journey (previously a separate page,
+         now an in-page section per the single-page architecture)
+         ============================================================ -->
+    <section class="section section--secondary-bg" id="craftsmanship" aria-labelledby="craftsmanship-heading">
+      <div class="container" style="max-width:640px; text-align:center; margin-bottom:3rem;">
+        <p class="text-label reveal-unveil reveal">The Making-Of</p>
+        <h2 id="craftsmanship-heading" class="reveal">From First Sketch to Your Doorstep</h2>
+      </div>
+
+      <div class="container journey">
+        <article class="journey__stage reveal">
+          <div class="split-section__media aspect-portrait">
+            <img class="img-fade" src="assets/craftsmanship/journey-design.webp" alt="Placeholder — replace with design-table or sketch photography" loading="lazy" width="1000" height="1250">
+          </div>
+          <div>
+            <p class="journey__number text-label">01 — Design</p>
+            <h3>The First Sketch</h3>
+            <p class="split-section__text">Every collection begins at the design table — mood boards, fabric swatches, and a silhouette sketch long before a single stitch is made.</p>
+          </div>
+        </article>
+
+        <article class="journey__stage reveal">
+          <div class="split-section__media aspect-portrait">
+            <img class="img-fade" src="assets/craftsmanship/journey-fabric.webp" alt="Placeholder — replace with fabric sourcing / texture photography" loading="lazy" width="1000" height="1250">
+          </div>
+          <div>
+            <p class="journey__number text-label">02 — Fabric Selection</p>
+            <h3>Sourced, Not Settled For</h3>
+            <p class="split-section__text">We choose fabric for how it will move and age, not just how it photographs — Banarasi silks, raw silks, and hand-loomed weaves from trusted regional mills.</p>
+          </div>
+        </article>
+
+        <article class="journey__stage reveal">
+          <div class="split-section__media aspect-portrait">
+            <img class="img-fade" src="assets/craftsmanship/journey-embroidery.webp" alt="Placeholder — replace with karigars hand-embroidering, macro detail" loading="lazy" width="1000" height="1250">
+          </div>
+          <div>
+            <p class="journey__number text-label">03 — Hand Embroidery</p>
+            <h3>The Slowest, Most Important Step</h3>
+            <p class="split-section__text">Zardozi, aari, gota-patti — each technique is done entirely by hand by karigars who have spent years, sometimes decades, mastering it.</p>
+          </div>
+        </article>
+
+        <article class="journey__stage reveal">
+          <div class="split-section__media aspect-portrait">
+            <img class="img-fade" src="assets/craftsmanship/journey-stitching.webp" alt="Placeholder — replace with tailoring/construction photography" loading="lazy" width="1000" height="1250">
+          </div>
+          <div>
+            <p class="journey__number text-label">04 — Stitching</p>
+            <h3>Built to Move With You</h3>
+            <p class="split-section__text">Precise tailoring and internal finishing you'll never see but will always feel — the difference between a garment and a piece of couture.</p>
+          </div>
+        </article>
+
+        <article class="journey__stage reveal">
+          <div class="split-section__media aspect-portrait">
+            <img class="img-fade" src="assets/craftsmanship/journey-inspection.webp" alt="Placeholder — replace with quality inspection photography" loading="lazy" width="1000" height="1250">
+          </div>
+          <div>
+            <p class="journey__number text-label">05 — Quality Inspection</p>
+            <h3>Checked by Hand, Every Time</h3>
+            <p class="split-section__text">Before anything ships, it's inspected stitch by stitch — embroidery, lining, and finishing all checked against the original design.</p>
+          </div>
+        </article>
+
+        <article class="journey__stage reveal">
+          <div class="split-section__media aspect-portrait">
+            <img class="img-fade" src="assets/craftsmanship/journey-final.webp" alt="Placeholder — replace with the completed, styled garment" loading="lazy" width="1000" height="1250">
+          </div>
+          <div>
+            <p class="journey__number text-label">06 — Final Garment</p>
+            <h3>Ready for Its Next Chapter</h3>
+            <p class="split-section__text">From here, it's yours — worn at your event, and one day, perhaps passed on. Explore the pieces that follow this same journey.</p>
+            <a class="btn btn--secondary" href="#products" data-scroll-link style="margin-top:1rem;">Shop the Collection</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         ABOUT (previously a separate page, now an in-page section)
+         ============================================================ -->
+    <section class="section" id="about" aria-labelledby="about-heading">
+      <div class="container">
+        <div class="split-section">
+          <div>
+            <p class="split-section__eyebrow text-label">The House of Suitwali</p>
+            <h2 id="about-heading" class="split-section__title">A Digital Atelier, Not a Marketplace</h2>
+            <p class="split-section__text">
+              Suitwali began with a simple idea: that shopping for a wedding outfit, a festive piece, or a bridal trousseau should feel like visiting a trusted family designer — not scrolling an endless catalogue.
+            </p>
+            <p class="split-section__text">
+              We work with a small circle of karigars across India, favouring quality and craftsmanship over volume. Every piece you see here is real, in stock or in production — nothing is generated or dropshipped. When you're ready, you enquire directly with us on WhatsApp, and a real person — not a bot — helps you from there.
+            </p>
+            <a class="btn btn--secondary" href="#contact" data-scroll-link>Get in Touch</a>
+          </div>
+          <div class="split-section__media aspect-square reveal-image">
+            <img class="img-fade" src="assets/craftsmanship/brand-intro.webp"
+                 alt="Placeholder — replace with a studio or founder photograph"
+                 loading="lazy" width="1200" height="1200">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CONTACT (previously a separate page, now an in-page section)
+         ============================================================ -->
+    <section class="section section--secondary-bg" id="contact" aria-labelledby="contact-heading">
+      <div class="container" style="max-width:560px; text-align:center;">
+        <p class="text-label">Get in Touch</p>
+        <h2 id="contact-heading" style="margin-bottom:1rem;">We'd Love to Help You Find the Right Piece</h2>
+        <p class="split-section__text" style="margin-inline:auto;">
+          The fastest way to reach us is WhatsApp — tell us the occasion, and we'll help from there. For anything else, use the details below.
+        </p>
+        <button class="btn btn--primary" type="button" data-whatsapp-open="general" style="margin-top:1rem;">Enquire on WhatsApp</button>
+
+        <dl class="craft-detail-grid" style="margin-top:2rem; text-align:left; max-width:360px; margin-inline:auto;">
+          <div>
+            <dt>Phone</dt>
+            <!-- PLACEHOLDER — see CONFIG.studioPhone in the script block -->
+            <dd data-contact-phone>+91 00000 00000 (placeholder)</dd>
+          </div>
+          <div>
+            <dt>Email</dt>
+            <!-- Intentionally left as "not yet available" rather than an
+                 invented address — see CONFIG.studioEmail (null) -->
+            <dd data-contact-email>Not yet available</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="site-footer__top">
+        <div>
+          <p class="site-footer__brand-name">
+            <img src="assets/logo/suitwali-logo.svg" alt="Suitwali">
+          </p>
+          <p class="site-footer__tagline">A premium digital showroom for handcrafted Indian couture.</p>
+          <div class="site-footer__social">
+            <a href="#" aria-label="Suitwali on Instagram">Instagram</a>
+            <a href="#" aria-label="Suitwali on Pinterest">Pinterest</a>
+          </div>
+        </div>
+
+        <nav aria-label="Footer">
+          <p class="site-footer__heading text-label">Explore</p>
+          <ul class="site-footer__list">
+            <li><a href="#collections" data-scroll-link>Collections</a></li>
+            <li><a href="#products" data-scroll-link>Shop</a></li>
+            <li><a href="#craftsmanship" data-scroll-link>Craftsmanship</a></li>
+            <li><a href="#about" data-scroll-link>About</a></li>
+            <li><a href="#contact" data-scroll-link>Contact</a></li>
+          </ul>
+        </nav>
+
+        <div>
+          <p class="site-footer__heading text-label">Get in Touch</p>
+          <ul class="site-footer__list">
+            <li><button type="button" data-whatsapp-open="general">WhatsApp Enquiry</button></li>
+            <li><span class="text-meta" data-contact-phone>+91 00000 00000 (placeholder)</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="site-footer__bottom">
+        <p class="site-footer__copyright">&copy; 2026 Suitwali. All rights reserved.</p>
+        <div class="site-footer__legal">
+          <button type="button" data-legal-open="privacy">Privacy Policy</button>
+          <button type="button" data-legal-open="terms">Terms &amp; Conditions</button>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       PRODUCT MODAL — full-screen product detail overlay, replaces a
+       separate Product Detail page entirely. Content is injected by
+       JS (renderProductModal) from the PRODUCTS array when a card is
+       tapped; this shell provides the fixed chrome (header/close/
+       sticky CTA) around that injected content.
+       ============================================================ -->
+  <div class="product-modal" id="product-modal" data-product-modal role="dialog" aria-modal="true" aria-labelledby="product-modal-name">
+    <div class="product-modal__header">
+      <button class="icon-btn" type="button" data-product-modal-close aria-label="Close and return to catalogue">
+        <svg viewBox="0 0 24 24" stroke-width="1.5" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
+      </button>
+      <span class="product-modal__code" data-product-modal-code></span>
+      <button class="icon-btn" type="button" data-product-modal-close aria-label="Close">
+        <svg viewBox="0 0 24 24" stroke-width="1.5" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="product-modal__body" data-product-modal-body>
+      <!-- Injected per-product by JS: gallery, name, craft details,
+           accordion (Fabric Story / Craft Story / Customisation / Care /
+           Delivery / FAQ), related products, and the Enquire button. -->
+    </div>
+    <div class="product-modal__sticky-cta" data-product-modal-sticky-cta>
+      <button class="btn btn--whatsapp cta-glow" type="button" data-product-modal-enquire>Enquire on WhatsApp</button>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       WHATSAPP ENQUIRY SHEET
+       ============================================================ -->
+  <div class="enquiry-backdrop" data-enquiry-backdrop></div>
+  <div class="enquiry-sheet" id="enquiry-sheet" data-enquiry-sheet role="dialog" aria-modal="true" aria-labelledby="enquiry-sheet-heading">
+    <div class="enquiry-sheet__handle" aria-hidden="true"></div>
+    <div class="enquiry-sheet__header">
+      <h3 id="enquiry-sheet-heading">Tell Us a Little More</h3>
+      <button class="icon-btn" type="button" data-enquiry-close aria-label="Close">
+        <svg viewBox="0 0 24 24" stroke-width="1.5" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <p class="enquiry-sheet__product" data-enquiry-product-line>Regarding: —</p>
+
+    <form data-enquiry-form>
+      <div class="enquiry-field">
+        <label for="enquiry-occasion">Occasion (optional)</label>
+        <input id="enquiry-occasion" type="text" placeholder="e.g. Sangeet, Reception" data-enquiry-field="occasion">
+      </div>
+      <div class="enquiry-field">
+        <label for="enquiry-date">Event date (optional)</label>
+        <input id="enquiry-date" type="date" data-enquiry-field="eventDate">
+      </div>
+      <div class="enquiry-field">
+        <label for="enquiry-colour">Preferred colour (optional)</label>
+        <input id="enquiry-colour" type="text" placeholder="e.g. Ivory, Deep Maroon" data-enquiry-field="preferredColour">
+      </div>
+
+      <div class="enquiry-field">
+        <label>Size (optional)</label>
+        <div class="enquiry-sheet__size-toggle" role="group" aria-label="Choose size type">
+          <button type="button" data-size-type="standard" class="is-active">Standard Size</button>
+          <button type="button" data-size-type="custom">Custom Measurements</button>
+        </div>
+        <select id="enquiry-standard-size" data-enquiry-field="standardSize" data-size-panel="standard">
+          <option value="">Select a size</option>
+          <option value="XS">XS</option>
+          <option value="S">S</option>
+          <option value="M">M</option>
+          <option value="L">L</option>
+          <option value="XL">XL</option>
+          <option value="Made-to-measure only">Made-to-measure only</option>
+        </select>
+        <textarea id="enquiry-custom-measurements" placeholder="Bust, waist, hip, length…" data-enquiry-field="customMeasurements" data-size-panel="custom" hidden></textarea>
+      </div>
+
+      <div class="enquiry-field">
+        <label for="enquiry-notes">Notes (optional)</label>
+        <textarea id="enquiry-notes" placeholder="Anything else we should know?" data-enquiry-field="notes"></textarea>
+      </div>
+
+      <div class="enquiry-sheet__actions">
+        <button class="btn btn--whatsapp" type="submit">Continue to WhatsApp</button>
+        <button class="enquiry-sheet__skip" type="button" data-enquiry-skip>Skip and continue to WhatsApp</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- ============================================================
+       LEGAL OVERLAYS — Privacy Policy / Terms, in-page per the
+       single-file architecture (no separate pages).
+       ============================================================ -->
+  <div class="legal-overlay" id="legal-privacy" data-legal-overlay="privacy" role="dialog" aria-modal="true" aria-label="Privacy Policy">
+    <div class="legal-overlay__header">
+      <h3>Privacy Policy</h3>
+      <button class="icon-btn" type="button" data-legal-close aria-label="Close">
+        <svg viewBox="0 0 24 24" stroke-width="1.5" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="legal-overlay__body">
+      <p class="text-meta">PLACEHOLDER CONTENT — replace with your final, legally-reviewed Privacy Policy before launch. This is not legal advice.</p>
+      <h3>Information We Collect</h3>
+      <p>When you enquire through this website, we may collect the details you choose to share in the enquiry form (such as occasion, event date, preferred colour, size, and notes), along with the product you were viewing. This information is sent directly to us via WhatsApp.</p>
+      <h3>How We Use It</h3>
+      <p>We use the information you share solely to respond to your enquiry and assist with your order. We do not sell or share your information with third parties.</p>
+      <h3>Contact</h3>
+      <p>For any privacy questions, please reach out via WhatsApp using the button on this site.</p>
+    </div>
+  </div>
+
+  <div class="legal-overlay" id="legal-terms" data-legal-overlay="terms" role="dialog" aria-modal="true" aria-label="Terms and Conditions">
+    <div class="legal-overlay__header">
+      <h3>Terms &amp; Conditions</h3>
+      <button class="icon-btn" type="button" data-legal-close aria-label="Close">
+        <svg viewBox="0 0 24 24" stroke-width="1.5" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="legal-overlay__body">
+      <p class="text-meta">PLACEHOLDER CONTENT — replace with your final, legally-reviewed Terms &amp; Conditions before launch. This is not legal advice.</p>
+      <h3>Orders &amp; Enquiries</h3>
+      <p>All orders are confirmed directly with our team via WhatsApp following your enquiry through this website. Pricing, availability, and customisation details will be shared during that conversation.</p>
+      <h3>Customisation &amp; Made-to-Measure</h3>
+      <p>Many pieces are available made-to-measure. Timelines vary by piece and are shared at the time of enquiry.</p>
+      <h3>Returns &amp; Exchanges</h3>
+      <p>Please discuss returns and exchanges directly with our team, as policies vary for made-to-measure and customised pieces.</p>
+    </div>
+  </div>
+
+
+  <script>
+  /* ============================================================
+     PRODUCT DATA
+     This is the entire product catalogue. To replace a product:
+     edit one object below and swap its image files in /assets/products/
+     (same filenames = zero code changes). To add a new product, copy
+     an existing object, give it a new unique "id" and "code", and add
+     it to this array. See EDITING-GUIDE.md for the full walkthrough.
+     ============================================================ */
+  const PRODUCTS = [
+    {
+      id: "prod-sw-an-001", code: "SW-AN-001", name: "Ivory Pearl Anarkali",
+      category: "Anarkali", collection: "Noor",
+      colour: "Ivory", fabric: "Katan Silk", handwork: "Aari work with hand-set pearls",
+      description: "A boat-neck Anarkali in Katan silk, finished with dense pearl and dabka embroidery along the neckline and cuffs.",
+      craftStory: "Aari work uses a hooked needle to chain-stitch at speed and precision, allowing dense pearl and dabka work without weighing down the silk beneath it.",
+      customisation: "Made-to-measure available. Sleeve length and neckline depth can be adjusted at no extra cost.",
+      delivery: "Ready-to-ship: 3–5 days. Made-to-measure: 3–4 weeks.",
+      care: "Dry clean only. Store flat or on a padded hanger, wrapped in muslin to protect the pearl embroidery.",
+      mainImage: "assets/products/sw-an-001-main.webp",
+      gallery: ["assets/products/sw-an-001-main.webp", "assets/products/sw-an-001-gallery-1.webp", "assets/products/sw-an-001-gallery-2.webp"],
+      video: null, featured: true, available: true,
+    },
+    {
+      id: "prod-sw-an-002", code: "SW-AN-002", name: "Blush Aari Anarkali",
+      category: "Anarkali", collection: "Noor",
+      colour: "Blush", fabric: "Georgette", handwork: "Aari and thread embroidery",
+      description: "A softer, floor-length Anarkali in blush georgette with delicate floral aari work through the bodice.",
+      craftStory: "Thread and aari work combine here for a lighter, more fluid embroidery style suited to georgette's natural movement.",
+      customisation: "Available in standard sizes XS–XL, or made-to-measure on request.",
+      delivery: "Ready-to-ship: 3–5 days. Made-to-measure: 3–4 weeks.",
+      care: "Dry clean only. Avoid direct sunlight for extended periods to preserve colour.",
+      mainImage: "assets/products/sw-an-002-main.webp",
+      gallery: ["assets/products/sw-an-002-main.webp", "assets/products/sw-an-002-gallery-1.webp", "assets/products/sw-an-002-gallery-2.webp"],
+      video: null, featured: false, available: true,
+    },
+    {
+      id: "prod-sw-an-003", code: "SW-AN-003", name: "Sapphire Velvet Anarkali",
+      category: "Anarkali", collection: "Mehfil",
+      colour: "Sapphire Blue", fabric: "Velvet", handwork: "Zari and sequin embroidery",
+      description: "A rich, jewel-toned velvet Anarkali designed for evening gatherings, with zari and sequin work catching candlelight beautifully.",
+      craftStory: "Velvet's depth of colour pairs with metallic zari thread to create a piece built specifically for low, warm evening light.",
+      customisation: "Made-to-measure only, given the structured velvet base.",
+      delivery: "Made-to-measure: 4–5 weeks.",
+      care: "Dry clean only. Steam rather than iron directly on velvet.",
+      mainImage: "assets/products/sw-an-003-main.webp",
+      gallery: ["assets/products/sw-an-003-main.webp", "assets/products/sw-an-003-gallery-1.webp", "assets/products/sw-an-003-gallery-2.webp"],
+      video: null, featured: true, available: true,
+    },
+    {
+      id: "prod-sw-lh-001", code: "SW-LH-001", name: "Crimson Zardozi Bridal Lehenga",
+      category: "Lehenga", collection: "Heirloom",
+      colour: "Crimson", fabric: "Raw Silk with Velvet Blouse", handwork: "Zardozi and gota-patti embroidery",
+      description: "A raw silk bridal lehenga with a heavily embroidered zardozi border and matching velvet blouse.",
+      craftStory: "Zardozi embroidery, historically reserved for royal courts, uses metallic threads and wire to build raised, dimensional patterns entirely by hand.",
+      customisation: "Made-to-measure only. Sleeve length, neckline depth, and back design can be adjusted during your consultation.",
+      delivery: "Made-to-measure: 6–8 weeks.",
+      care: "Dry clean only. Store flat in acid-free tissue; avoid folding directly across embroidered sections.",
+      mainImage: "assets/products/sw-lh-001-main.webp",
+      gallery: ["assets/products/sw-lh-001-main.webp", "assets/products/sw-lh-001-gallery-1.webp", "assets/products/sw-lh-001-gallery-2.webp"],
+      video: null, featured: true, available: true,
+    },
+    {
+      id: "prod-sw-lh-002", code: "SW-LH-002", name: "Emerald Gota Lehenga",
+      category: "Lehenga", collection: "Festival Edit",
+      colour: "Emerald", fabric: "Silk Cotton", handwork: "Gota-patti appliqué",
+      description: "A lighter festive lehenga in emerald silk cotton, finished with traditional gota-patti appliqué border work.",
+      craftStory: "Gota-patti uses woven metallic ribbon, folded and appliquéd by hand into geometric and floral motifs — lighter than zardozi, ideal for daytime festivities.",
+      customisation: "Available in standard sizes S–XL, or made-to-measure on request.",
+      delivery: "Ready-to-ship: 5–7 days. Made-to-measure: 3 weeks.",
+      care: "Dry clean recommended. Spot clean only for minor marks.",
+      mainImage: "assets/products/sw-lh-002-main.webp",
+      gallery: ["assets/products/sw-lh-002-main.webp", "assets/products/sw-lh-002-gallery-1.webp", "assets/products/sw-lh-002-gallery-2.webp"],
+      video: null, featured: false, available: true,
+    },
+    {
+      id: "prod-sw-sh-001", code: "SW-SH-001", name: "Rani Pink Sharara Set",
+      category: "Sharara", collection: "Mehfil",
+      colour: "Rani Pink", fabric: "Silk Chinon", handwork: "Mirror and thread embroidery",
+      description: "A flowing sharara set in rani pink silk chinon, with mirror work detailing across the kurti yoke.",
+      craftStory: "Mirror work (shisha) is set by hand into a thread frame, a technique rooted in Rajasthani and Gujarati embroidery traditions.",
+      customisation: "Available in standard sizes XS–XL.",
+      delivery: "Ready-to-ship: 4–6 days.",
+      care: "Dry clean only.",
+      mainImage: "assets/products/sw-sh-001-main.webp",
+      gallery: ["assets/products/sw-sh-001-main.webp", "assets/products/sw-sh-001-gallery-1.webp", "assets/products/sw-sh-001-gallery-2.webp"],
+      video: null, featured: false, available: true,
+    },
+    {
+      id: "prod-sw-sh-002", code: "SW-SH-002", name: "Teal Banarasi Sharara",
+      category: "Sharara", collection: "Festival Edit",
+      colour: "Teal", fabric: "Banarasi Silk", handwork: "Zari woven border",
+      description: "A structured sharara in woven Banarasi silk, the border pattern loomed directly into the fabric rather than embroidered after.",
+      craftStory: "Banarasi weaving is done on traditional handlooms in Varanasi, with the zari border woven into the fabric itself — a technique distinct from embroidery.",
+      customisation: "Available in standard sizes S–XL, or made-to-measure on request.",
+      delivery: "Ready-to-ship: 5–7 days. Made-to-measure: 3 weeks.",
+      care: "Dry clean only. Fold along existing lines to protect the woven border.",
+      mainImage: "assets/products/sw-sh-002-main.webp",
+      gallery: ["assets/products/sw-sh-002-main.webp", "assets/products/sw-sh-002-gallery-1.webp", "assets/products/sw-sh-002-gallery-2.webp"],
+      video: null, featured: false, available: true,
+    },
+    {
+      id: "prod-sw-st-001", code: "SW-ST-001", name: "Charcoal Chikankari Suit",
+      category: "Suit", collection: "Noor",
+      colour: "Charcoal", fabric: "Cotton Silk", handwork: "Lucknowi chikankari",
+      description: "A refined daywear suit in charcoal cotton silk, finished with fine white-on-white chikankari embroidery.",
+      craftStory: "Chikankari is a centuries-old Lucknowi shadow-work embroidery technique, traditionally worked entirely by hand with white thread on fine fabric.",
+      customisation: "Available in standard sizes XS–XL.",
+      delivery: "Ready-to-ship: 3–5 days.",
+      care: "Dry clean recommended; hand wash cold if needed, dry flat in shade.",
+      mainImage: "assets/products/sw-st-001-main.webp",
+      gallery: ["assets/products/sw-st-001-main.webp", "assets/products/sw-st-001-gallery-1.webp", "assets/products/sw-st-001-gallery-2.webp"],
+      video: null, featured: false, available: true,
+    },
+    {
+      id: "prod-sw-br-001", code: "SW-BR-001", name: "Maroon Bridal Ensemble",
+      category: "Bridal", collection: "Bridal Couture",
+      colour: "Maroon", fabric: "Silk Velvet", handwork: "Zardozi, dabka, and pearl work",
+      description: "A full bridal ensemble in maroon silk velvet, combining zardozi, dabka, and hand-set pearls across the lehenga and dupatta.",
+      craftStory: "This piece required three karigars working in parallel across six weeks to complete the border alone.",
+      customisation: "Made-to-measure only, as with all Bridal Couture pieces.",
+      delivery: "Made-to-measure: 8–10 weeks — please enquire early for wedding-date planning.",
+      care: "Dry clean only. Professional storage recommended between wear.",
+      mainImage: "assets/products/sw-br-001-main.webp",
+      gallery: ["assets/products/sw-br-001-main.webp", "assets/products/sw-br-001-gallery-1.webp", "assets/products/sw-br-001-gallery-2.webp"],
+      video: null, featured: true, available: true,
+    },
+    {
+      id: "prod-sw-br-002", code: "SW-BR-002", name: "Gold Zari Bridal Lehenga",
+      category: "Bridal", collection: "Bridal Couture",
+      colour: "Gold", fabric: "Silk Organza", handwork: "Zari and sequin embroidery",
+      description: "A statement gold bridal lehenga in silk organza, with dense zari and sequin embroidery across the full skirt.",
+      craftStory: "The all-over zari and sequin work is applied in graduated density, heaviest at the hem, so the embroidery catches light differently as the lehenga moves.",
+      customisation: "Made-to-measure only.",
+      delivery: "Made-to-measure: 8–10 weeks.",
+      care: "Dry clean only. Store flat, away from direct light.",
+      mainImage: "assets/products/sw-br-002-main.webp",
+      gallery: ["assets/products/sw-br-002-main.webp", "assets/products/sw-br-002-gallery-1.webp", "assets/products/sw-br-002-gallery-2.webp"],
+      video: null, featured: false, available: false,
+    },
+  ];
+
+  /* ============================================================
+     COLLECTION DATA
+     ============================================================ */
+  const COLLECTIONS = [
+    { name: "Noor", philosophy: "Light as the ultimate embellishment.", mood: ["Luminous", "Soft", "Quietly opulent"], heroImage: "assets/collections/noor.webp" },
+    { name: "Heirloom", philosophy: "Pieces built to be worn once by you, and again by your daughter.", mood: ["Timeless", "Regal", "Unhurried"], heroImage: "assets/collections/heirloom.webp" },
+    { name: "Mehfil", philosophy: "Made for the room that gathers after the ceremony ends.", mood: ["Rich", "Intimate", "Jewel-toned"], heroImage: "assets/collections/mehfil.webp" },
+    { name: "Festival Edit", philosophy: "Celebration wear that moves as freely as the day does.", mood: ["Vibrant", "Joyful", "Tactile"], heroImage: "assets/collections/festival-edit.webp" },
+    { name: "Bridal Couture", philosophy: "The outfit that carries the weight — literal and emotional — of the biggest day.", mood: ["Grand", "Ceremonial", "Deeply personal"], heroImage: "assets/collections/bridal-couture.webp" },
+  ];
+
+  /* ============================================================
+     CONFIG
+     ============================================================ */
+  const CONFIG = {
+    // PLACEHOLDER — replace with the real WhatsApp number in E.164
+    // format WITHOUT the leading "+" (e.g. Indian mobile 98765 43210
+    // becomes "919876543210"). Do not invent a real number.
+    whatsappNumber: "910000000000",
+    studioPhone: "+91 00000 00000 (placeholder)",
+    // Intentionally null — no real studio email has been supplied.
+    // Do not guess one; the Contact section shows "Not yet available"
+    // whenever this is null.
+    studioEmail: null,
+  };
+
+  /* ============================================================
+     UTILITIES
+     ============================================================ */
+  const qs = (sel, parent = document) => parent.querySelector(sel);
+  const qsa = (sel, parent = document) => Array.from(parent.querySelectorAll(sel));
+
+  function throttle(fn, limit = 150) {
+    let inThrottle = false;
+    return (...args) => {
+      if (!inThrottle) {
+        fn(...args);
+        inThrottle = true;
+        setTimeout(() => { inThrottle = false; }, limit);
+      }
+    };
+  }
+
+  function lockScroll() { document.body.classList.add("no-scroll"); }
+  function unlockScroll() { document.body.classList.remove("no-scroll"); }
+
+  function prefersReducedMotion() {
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  }
+
+  function initImageFade(img) {
+    if (img.complete) { img.classList.add("is-loaded"); return; }
+    img.addEventListener("load", () => img.classList.add("is-loaded"), { once: true });
+  }
+  function initAllImageFades(selector = ".img-fade") {
+    qsa(selector).forEach(initImageFade);
+  }
+
+  function initScrollReveal(selector = ".reveal, .reveal-unveil") {
+    const els = qsa(selector);
+    if (els.length === 0) return;
+    if (prefersReducedMotion()) { els.forEach((el) => el.classList.add("is-visible")); return; }
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: "0px 0px -40px 0px" });
+    els.forEach((el) => observer.observe(el));
+  }
+
+  function buildWhatsAppUrl(message) {
+    return `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`;
+  }
+
+  /* Composes the WhatsApp message from a product plus any optional
+     Enquiry Sheet fields. Any field the customer left blank is
+     silently omitted — never shown as "Occasion: " with nothing after. */
+  function composeEnquiryMessage(product, details = {}) {
+    const parts = [];
+    if (details.occasion) parts.push(`Occasion: ${details.occasion}.`);
+    if (details.eventDate) parts.push(`Event Date: ${details.eventDate}.`);
+    if (details.preferredColour) parts.push(`Preferred Colour: ${details.preferredColour}.`);
+    if (details.sizeType === "standard" && details.standardSize) parts.push(`Size: ${details.standardSize}.`);
+    if (details.sizeType === "custom" && details.customMeasurements) parts.push(`Measurements: ${details.customMeasurements}.`);
+    if (details.notes) parts.push(`Notes: ${details.notes}.`);
+    const optional = parts.length ? ` ${parts.join(" ")}` : "";
+    const productLine = product
+      ? `Hi Suitwali, I'm interested in the ${product.name} (${product.code}) from the ${product.collection} collection.`
+      : "Hi Suitwali, I'd like to know more about your collections.";
+    return `${productLine}${optional} Could you share more details?`;
+  }
+
+  /* ============================================================
+     RENDER: COLLECTIONS
+     ============================================================ */
+  function renderCollections() {
+    const track = qs("[data-collections-track]");
+    if (!track) return;
+    track.innerHTML = COLLECTIONS.map((c) => `
+      <article class="carousel__item">
+        <a class="collection-card reveal" href="#products" data-scroll-link data-collection-filter="${c.name}">
+          <div class="collection-card__media aspect-portrait zoom-on-hover">
+            <img class="img-fade" src="${c.heroImage}" alt="Placeholder — replace with editorial photography for the ${c.name} collection" loading="lazy" width="960" height="1200">
+          </div>
+          <div class="collection-card__body">
+            <h3 class="collection-card__name">${c.name}</h3>
+            <p class="collection-card__mood">${c.mood.map((m) => `<span class="collection-card__mood-tag">${m}</span>`).join("")}</p>
+            <p class="collection-card__philosophy">${c.philosophy}</p>
+          </div>
+        </a>
+      </article>
+    `).join("");
+    initScrollReveal(".carousel__item .reveal");
+    initAllImageFades(".carousel__item .img-fade");
+  }
+
+  /* ============================================================
+     RENDER: PRODUCTS, SEARCH & FILTERS
+     ============================================================ */
+  let activeFilter = "All";
+  let activeQuery = "";
+
+  function productMatches(p) {
+    const matchesFilter = activeFilter === "All" || p.collection === activeFilter;
+    if (!matchesFilter) return false;
+    if (!activeQuery) return true;
+    const haystack = `${p.name} ${p.code} ${p.category} ${p.collection} ${p.colour} ${p.fabric} ${p.handwork}`.toLowerCase();
+    return haystack.includes(activeQuery.toLowerCase());
+  }
+
+  function renderFilterChips() {
+    const container = qs("[data-filter-chips]");
+    if (!container) return;
+    const names = ["All", ...COLLECTIONS.map((c) => c.name)];
+    container.innerHTML = names.map((name) => `
+      <button type="button" class="filter-chip${name === activeFilter ? " is-active" : ""}" data-filter="${name}">${name}</button>
+    `).join("");
+    qsa("[data-filter]", container).forEach((btn) => {
+      btn.addEventListener("click", () => {
+        activeFilter = btn.dataset.filter;
+        renderFilterChips();
+        renderProductGrid();
+      });
+    });
+  }
+
+  function productCardMarkup(p) {
+    return `
+      <button type="button" class="product-grid__card reveal" data-product-open="${p.id}">
+        <div class="product-card">
+          <div class="product-card__media aspect-portrait zoom-on-hover">
+            <img class="img-fade" src="${p.mainImage}" alt="Placeholder — replace with editorial photography for ${p.name}" loading="lazy" width="960" height="1200">
+          </div>
+          <div class="product-card__body">
+            <p class="product-card__collection">${p.collection}</p>
+            <h3 class="product-card__name">${p.name}</h3>
+            <p class="product-card__meta">${p.fabric} · ${p.colour}</p>
+            ${p.available ? "" : `<span class="product-card__unavailable">Currently Unavailable</span>`}
+          </div>
+        </div>
+      </button>
+    `;
+  }
+
+  function renderProductGrid() {
+    const grid = qs("[data-product-grid]");
+    if (!grid) return;
+    const results = PRODUCTS.filter(productMatches);
+    grid.innerHTML = results.length
+      ? results.map(productCardMarkup).join("")
+      : `<p class="product-grid__empty">No pieces matched — try a different collection or search term.</p>`;
+    qsa("[data-product-open]", grid).forEach((btn) => {
+      btn.addEventListener("click", () => openProductModal(btn.dataset.productOpen));
+    });
+    initScrollReveal(".product-grid__card.reveal");
+    initAllImageFades("[data-product-grid] .img-fade");
+  }
+
+  function initCatalogueSearch() {
+    const input = qs("[data-catalogue-search]");
+    if (!input) return;
+    input.addEventListener("input", throttle(() => {
+      activeQuery = input.value.trim();
+      renderProductGrid();
+    }, 150));
+  }
+
+  /* ============================================================
+     RENDER: LIFESTYLE STRIP
+     Reuses existing collection/product photography rather than
+     requiring a dedicated image set — reduces the client's ongoing
+     image-management workload.
+     ============================================================ */
+  function renderLifestyleGrid() {
+    const grid = qs("[data-lifestyle-grid]");
+    if (!grid) return;
+    const pool = [
+      ...COLLECTIONS.map((c) => ({ src: c.heroImage, label: c.name })),
+      ...PRODUCTS.filter((p) => p.featured).map((p) => ({ src: p.mainImage, label: p.name })),
+    ].slice(0, 6);
+    grid.innerHTML = pool.map((item) => `
+      <a class="lifestyle-grid__item aspect-square" href="#" target="_blank" rel="noopener" aria-label="View on Instagram">
+        <img class="lifestyle-grid__image img-fade" src="${item.src}" alt="Placeholder lifestyle photograph — ${item.label}" loading="lazy" width="800" height="800">
+      </a>
+    `).join("");
+    initAllImageFades("[data-lifestyle-grid] .img-fade");
+  }
+
+  /* ============================================================
+     PRODUCT MODAL
+     Full-screen product detail overlay — the single-page replacement
+     for a separate Product Detail page.
+     ============================================================ */
+  let currentModalProduct = null;
+  let modalLastFocused = null;
+
+  function relatedProducts(product) {
+    return PRODUCTS.filter((p) => p.id !== product.id && p.collection === product.collection).slice(0, 3);
+  }
+
+  function accordionItem(title, bodyHtml, open = false) {
+    return `
+      <details class="product-accordion__item"${open ? " open" : ""}>
+        <summary>${title}</summary>
+        <p>${bodyHtml}</p>
+      </details>
+    `;
+  }
+
+  function renderProductModal(product) {
+    const body = qs("[data-product-modal-body]");
+    const codeEl = qs("[data-product-modal-code]");
+    if (!body) return;
+    codeEl.textContent = product.code;
+
+    const related = relatedProducts(product);
+
+    body.innerHTML = `
+      <div class="product-modal__gallery">
+        ${product.gallery.map((src, i) => `
+          <img src="${src}" alt="Placeholder — ${product.name}, view ${i + 1}" loading="${i === 0 ? "eager" : "lazy"}">
+        `).join("")}
+      </div>
+      <div class="product-modal__content">
+        <p class="product-modal__collection">${product.collection}</p>
+        <h2 id="product-modal-name" class="product-modal__name">${product.name}</h2>
+        ${product.available ? "" : `<p class="text-meta" style="color:var(--color-accent); margin-bottom:1rem;">Currently unavailable — enquire for restock timing.</p>`}
+        <p class="text-lead">${product.description}</p>
+
+        <dl class="craft-detail-grid">
+          <div><dt>Fabric</dt><dd>${product.fabric}</dd></div>
+          <div><dt>Colour</dt><dd>${product.colour}</dd></div>
+          <div><dt>Handwork</dt><dd>${product.handwork}</dd></div>
+          <div><dt>Category</dt><dd>${product.category}</dd></div>
+        </dl>
+
+        <div class="product-accordion">
+          ${accordionItem("Craft Story", product.craftStory, true)}
+          ${accordionItem("Customisation", product.customisation)}
+          ${accordionItem("Delivery", product.delivery)}
+          ${accordionItem("Care Instructions", product.care)}
+        </div>
+
+        <button class="btn btn--whatsapp" type="button" data-product-modal-enquire-inline style="margin-top:2rem;">Enquire on WhatsApp</button>
+
+        ${related.length ? `
+          <div class="product-modal__related">
+            <h3 class="product-modal__related-heading">You May Also Love</h3>
+            <div class="carousel">
+              <div class="carousel__track">
+                ${related.map((p) => `
+                  <article class="carousel__item">
+                    <button type="button" class="product-grid__card" data-product-open="${p.id}" style="width:100%;">
+                      <div class="product-card">
+                        <div class="product-card__media aspect-portrait">
+                          <img src="${p.mainImage}" alt="Placeholder — ${p.name}" loading="lazy">
+                        </div>
+                        <div class="product-card__body">
+                          <p class="product-card__collection">${p.collection}</p>
+                          <h3 class="product-card__name">${p.name}</h3>
+                        </div>
+                      </div>
+                    </button>
+                  </article>
+                `).join("")}
+              </div>
+            </div>
+          </div>
+        ` : ""}
+      </div>
+    `;
+
+    qsa("[data-product-open]", body).forEach((btn) => {
+      btn.addEventListener("click", () => openProductModal(btn.dataset.productOpen));
+    });
+    qs("[data-product-modal-enquire-inline]", body)?.addEventListener("click", () => openEnquirySheet(product));
+
+    initAllImageFades(".product-modal__gallery img"); // gallery images aren't .img-fade (always visible immediately on open)
+  }
+
+  function openProductModal(productId) {
+    const product = PRODUCTS.find((p) => p.id === productId);
+    if (!product) return;
+    currentModalProduct = product;
+    modalLastFocused = document.activeElement;
+
+    renderProductModal(product);
+
+    const modal = qs("[data-product-modal]");
+    modal.classList.add("is-open");
+    modal.scrollTop = 0;
+    lockScroll();
+    document.addEventListener("keydown", onModalKeydown);
+
+    const stickyCta = qs("[data-product-modal-sticky-cta]");
+    const gallery = qs(".product-modal__gallery", modal);
+    stickyCta.classList.remove("is-visible");
+    if (gallery) {
+      const io = new IntersectionObserver(([entry]) => {
+        stickyCta.classList.toggle("is-visible", !entry.isIntersecting);
+      }, { root: modal, threshold: 0 });
+      io.observe(gallery);
+    }
+
+    requestAnimationFrame(() => qs("[data-product-modal-close]", modal)?.focus());
+  }
+
+  function closeProductModal() {
+    const modal = qs("[data-product-modal]");
+    modal.classList.remove("is-open");
+    unlockScroll();
+    document.removeEventListener("keydown", onModalKeydown);
+    modalLastFocused?.focus();
+  }
+
+  function onModalKeydown(e) {
+    if (e.key === "Escape") closeProductModal();
+  }
+
+  /* ============================================================
+     WHATSAPP ENQUIRY SHEET
+     ============================================================ */
+  let enquiryContext = null; // the product this enquiry is about, or null for a general enquiry
+  let selectedSizeType = "standard";
+
+  function openEnquirySheet(product) {
+    enquiryContext = product || null;
+    const sheet = qs("[data-enquiry-sheet]");
+    const backdrop = qs("[data-enquiry-backdrop]");
+    const productLine = qs("[data-enquiry-product-line]");
+
+    productLine.textContent = product ? `Regarding: ${product.name} (${product.code})` : "General enquiry";
+
+    qs("[data-enquiry-form]").reset();
+    selectedSizeType = "standard";
+    qsa("[data-size-type]").forEach((btn) => btn.classList.toggle("is-active", btn.dataset.sizeType === "standard"));
+    qs('[data-size-panel="standard"]').hidden = false;
+    qs('[data-size-panel="custom"]').hidden = true;
+
+    backdrop.classList.add("is-open");
+    sheet.classList.add("is-open");
+    lockScroll();
+    document.addEventListener("keydown", onEnquiryKeydown);
+    requestAnimationFrame(() => qs("#enquiry-occasion")?.focus());
+  }
+
+  function closeEnquirySheet() {
+    qs("[data-enquiry-sheet]").classList.remove("is-open");
+    qs("[data-enquiry-backdrop]").classList.remove("is-open");
+    unlockScroll();
+    document.removeEventListener("keydown", onEnquiryKeydown);
+  }
+
+  function onEnquiryKeydown(e) {
+    if (e.key === "Escape") closeEnquirySheet();
+  }
+
+  function collectEnquiryDetails() {
+    const details = { sizeType: selectedSizeType };
+    qsa("[data-enquiry-field]").forEach((field) => {
+      const key = field.dataset.enquiryField;
+      if (field.dataset.sizePanel && field.dataset.sizePanel !== selectedSizeType) return; // skip the hidden size field
+      if (field.value) details[key] = field.value;
+    });
+    return details;
+  }
+
+  function proceedToWhatsApp(details) {
+    const message = composeEnquiryMessage(enquiryContext, details);
+    const url = buildWhatsAppUrl(message);
+    // NOTE: this is where a future POST to an enquiry-storage endpoint
+    // would happen before redirecting — see EDITING-GUIDE.md for the
+    // documented upgrade path. Storage is intentionally not wired up in
+    // this static, no-backend build; redirecting straight to WhatsApp is
+    // the entire, correct Phase 1 behaviour.
+    window.open(url, "_blank", "noopener");
+    closeEnquirySheet();
+  }
+
+  function initEnquirySheet() {
+    // Header, mobile nav, and footer/contact WhatsApp buttons are always
+    // general enquiries — only the Product Modal's own CTA (handled
+    // separately below) is product-specific.
+    qsa("[data-whatsapp-open]").forEach((btn) => {
+      btn.addEventListener("click", () => openEnquirySheet(null));
+    });
+    qs("[data-product-modal-enquire]")?.addEventListener("click", () => openEnquirySheet(currentModalProduct));
+
+    qs("[data-enquiry-close]")?.addEventListener("click", closeEnquirySheet);
+    qs("[data-enquiry-backdrop]")?.addEventListener("click", closeEnquirySheet);
+
+    qsa("[data-size-type]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        selectedSizeType = btn.dataset.sizeType;
+        qsa("[data-size-type]").forEach((b) => b.classList.toggle("is-active", b === btn));
+        qs('[data-size-panel="standard"]').hidden = selectedSizeType !== "standard";
+        qs('[data-size-panel="custom"]').hidden = selectedSizeType !== "custom";
+      });
+    });
+
+    qs("[data-enquiry-form]")?.addEventListener("submit", (e) => {
+      e.preventDefault();
+      proceedToWhatsApp(collectEnquiryDetails());
+    });
+
+    qs("[data-enquiry-skip]")?.addEventListener("click", () => proceedToWhatsApp({}));
+  }
+
+  /* ============================================================
+     HEADER / STICKY / MOBILE NAV / SEARCH OVERLAY
+     ============================================================ */
+  function initStickyHeader() {
+    const header = qs("[data-header]");
+    if (!header) return;
+    const apply = () => header.classList.toggle("is-solid", window.scrollY > 80);
+    apply();
+    window.addEventListener("scroll", throttle(apply, 100), { passive: true });
+  }
+
+  function initOverlay({ triggerSelector, overlaySelector, closeSelector, focusSelector }) {
+    const triggers = qsa(triggerSelector);
+    const overlay = qs(overlaySelector);
+    if (!triggers.length || !overlay) return;
+    const closeBtns = closeSelector ? qsa(closeSelector, overlay) : [];
+    let lastFocused = null;
+
+    function open() {
+      lastFocused = document.activeElement;
+      overlay.classList.add("is-open");
+      lockScroll();
+      const target = focusSelector ? qs(focusSelector, overlay) : overlay;
+      requestAnimationFrame(() => target?.focus());
+      document.addEventListener("keydown", onKey);
+    }
+    function close() {
+      overlay.classList.remove("is-open");
+      unlockScroll();
+      document.removeEventListener("keydown", onKey);
+      lastFocused?.focus();
+    }
+    function onKey(e) { if (e.key === "Escape") close(); }
+
+    triggers.forEach((trigger) => trigger.addEventListener("click", () => {
+      overlay.classList.contains("is-open") ? close() : open();
+    }));
+    closeBtns.forEach((btn) => btn.addEventListener("click", close));
+  }
+
+  function initAnnouncementBar() {
+    qs("[data-announcement-close]")?.addEventListener("click", () => {
+      const bar = qs("[data-announcement]");
+      if (bar) bar.hidden = true;
+    });
+  }
+
+  /* ============================================================
+     SEARCH & FILTERS (header search overlay — searches PRODUCTS live)
+     ============================================================ */
+  function searchResultCard(p) {
+    return `
+      <button type="button" class="product-grid__card" data-search-result="${p.id}">
+        <div class="product-card">
+          <div class="product-card__media aspect-portrait">
+            <img src="${p.mainImage}" alt="Placeholder — ${p.name}" loading="lazy">
+          </div>
+          <div class="product-card__body">
+            <p class="product-card__collection">${p.collection}</p>
+            <h3 class="product-card__name">${p.name}</h3>
+          </div>
+        </div>
+      </button>
+    `;
+  }
+
+  function runHeaderSearch(query) {
+    const resultsEl = qs("[data-search-results]");
+    const emptyEl = qs("[data-search-empty]");
+    const hintEl = qs("[data-search-hint]");
+    if (!query) {
+      resultsEl.innerHTML = "";
+      emptyEl.hidden = true;
+      hintEl.hidden = false;
+      return;
+    }
+    hintEl.hidden = true;
+    const q = query.toLowerCase();
+    const results = PRODUCTS.filter((p) =>
+      `${p.name} ${p.code} ${p.category} ${p.collection} ${p.colour} ${p.fabric} ${p.handwork}`.toLowerCase().includes(q)
+    );
+    emptyEl.hidden = results.length > 0;
+    resultsEl.innerHTML = results.map(searchResultCard).join("");
+    qsa("[data-search-result]", resultsEl).forEach((btn) => {
+      btn.addEventListener("click", () => {
+        qs("[data-search-close]").click();
+        openProductModal(btn.dataset.searchResult);
+      });
+    });
+  }
+
+  function initHeaderSearch() {
+    const input = qs("[data-search-input]");
+    if (!input) return;
+    input.addEventListener("input", throttle(() => runHeaderSearch(input.value.trim()), 150));
+    qsa("[data-search-chip]").forEach((chip) => {
+      chip.addEventListener("click", () => {
+        input.value = chip.dataset.searchChip;
+        input.focus();
+        runHeaderSearch(input.value);
+      });
+    });
+  }
+
+  /* ============================================================
+     SMOOTH SCROLL NAV (single-page navigation)
+     ============================================================ */
+  function initScrollLinks() {
+    qsa("[data-scroll-link]").forEach((link) => {
+      link.addEventListener("click", (e) => {
+        const href = link.getAttribute("href");
+        if (!href || !href.startsWith("#")) return;
+        const target = qs(href);
+        if (!target) return;
+        e.preventDefault();
+
+        // Collection cards also carry a filter to apply before scrolling.
+        if (link.dataset.collectionFilter) {
+          activeFilter = link.dataset.collectionFilter;
+          renderFilterChips();
+          renderProductGrid();
+        }
+
+        // Close any open overlay first so the scroll isn't fighting a
+        // locked body.
+        qs("[data-nav-menu]")?.classList.remove("is-open");
+        qs("[data-search-overlay]")?.classList.remove("is-open");
+        unlockScroll();
+
+        target.scrollIntoView({ behavior: prefersReducedMotion() ? "auto" : "smooth" });
+      });
+    });
+  }
+
+  /* ============================================================
+     LEGAL OVERLAYS (Privacy / Terms)
+     ============================================================ */
+  function initLegalOverlays() {
+    qsa("[data-legal-open]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const overlay = qs(`[data-legal-overlay="${btn.dataset.legalOpen}"]`);
+        overlay?.classList.add("is-open");
+        lockScroll();
+      });
+    });
+    qsa("[data-legal-close]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        btn.closest(".legal-overlay")?.classList.remove("is-open");
+        unlockScroll();
+      });
+    });
+  }
+
+  /* ============================================================
+     CONTACT DETAILS (from CONFIG — never hard-coded twice)
+     ============================================================ */
+  function applyContactDetails() {
+    qsa("[data-contact-phone]").forEach((el) => { el.textContent = CONFIG.studioPhone; });
+    qsa("[data-contact-email]").forEach((el) => { el.textContent = CONFIG.studioEmail || "Not yet available"; });
+  }
+
+  /* ============================================================
+     INIT
+     ============================================================ */
+  document.addEventListener("DOMContentLoaded", () => {
+    renderCollections();
+    renderFilterChips();
+    renderProductGrid();
+    renderLifestyleGrid();
+    applyContactDetails();
+
+    initCatalogueSearch();
+    initHeaderSearch();
+    initStickyHeader();
+    initAnnouncementBar();
+    initScrollLinks();
+    initLegalOverlays();
+    initEnquirySheet();
+
+    initOverlay({ triggerSelector: "[data-nav-toggle]", overlaySelector: "[data-nav-menu]", closeSelector: "[data-nav-close]", focusSelector: ".nav-menu__link" });
+    initOverlay({ triggerSelector: "[data-search-toggle]", overlaySelector: "[data-search-overlay]", closeSelector: "[data-search-close]", focusSelector: "#search-input" });
+
+    qsa("[data-product-modal-close]").forEach((btn) => btn.addEventListener("click", closeProductModal));
+
+    initScrollReveal();
+    initAllImageFades();
+  });
+</script>
+</body>
+</html>
